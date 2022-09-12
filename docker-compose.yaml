@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+
+  db:
+    image: mongo:5
+    container_name: mongo-user-ddd
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGODB_DATABASE: user-ddd
+    volumes:
+      - ./mongo:/data/db
+  db2:
+    image: postgres:14.3
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_BD: ${DB_NAME}
+    container_name: psql-user-ddd
+    volumes:
+      - ./postgres:/var/lib/postgresql/data

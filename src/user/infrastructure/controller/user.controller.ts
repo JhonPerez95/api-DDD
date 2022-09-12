@@ -13,6 +13,12 @@ export class UserController {
     return res.status(200).json({ msg: 'data is successfully', data: userList })
   }
 
+  public getUserById = async (req: Request, res: Response) => {
+    const { params } = req
+    const userDb = await this.userUseCase.getUserById(String(params))
+    return res.status(200).json({ msg: 'User !', data: userDb })
+  }
+
   public createUser = async (req: Request, res: Response) => {
     const { body } = req
     const userDb = await this.userUseCase.registerUser(body)

@@ -3,7 +3,6 @@ import { UserValue } from '../domain/user.value'
 import { UserRepository } from '../domain/user.repository'
 
 export class UserUseCase {
-  
   constructor(private readonly userRepository: UserRepository) {}
 
   public registerUser = async (userIn: UserEntity) => {
@@ -15,5 +14,10 @@ export class UserUseCase {
   public getUsers = async () => {
     const userList = await this.userRepository.listUsers()
     return userList
+  }
+
+  public getUserById = async (email: string) => {
+    const userDb = await this.userRepository.findUserById(email)
+    return userDb
   }
 }
